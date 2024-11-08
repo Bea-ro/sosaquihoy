@@ -1,0 +1,10 @@
+main {
+  height: 100vh;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 40%;
+  color: var(--color-red);
+  font-size: 72px;
+}

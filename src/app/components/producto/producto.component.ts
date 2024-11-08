@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from '../../models/models';
 import { products } from '../../data/products';
 
@@ -11,5 +11,9 @@ import { products } from '../../data/products';
   styleUrl: './producto.component.css',
 })
 export class ProductoComponent {
-  products: Product[] = products;
+  @Input() products: Product[] = [];
+  isSelected: boolean = false;
+  public selectedProduct() {
+    this.isSelected = !this.isSelected;
+  }
 }

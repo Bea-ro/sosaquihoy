@@ -1,0 +1,26 @@
+nav {
+  /* position: fixed; */
+  position: fixed;
+  z-index: 500;
+  bottom: 0px;
+  width: 100%;
+  background-color: var(--color-yellow);
+  padding: 8px;
+}
+
+ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+a {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fa-hand-holding {
+  margin-bottom: 10px;
+  font-size: 36px;
+}

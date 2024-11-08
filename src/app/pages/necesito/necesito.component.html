@@ -1,3 +1,9 @@
-<ul>
-  <app-producto></app-producto>
-</ul>
+<main>
+  <input
+    type="search"
+    placeholder="Escribe qué necesitas"
+    (input)="getFilteredProducts($event)"
+  />
+  <app-producto [products]="filteredProducts"></app-producto>
+</main>
+<app-navbar></app-navbar>

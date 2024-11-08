@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-reparto',
   standalone: true,
-  imports: [],
+  imports: [NavbarComponent],
   templateUrl: './reparto.component.html',
-  styleUrl: './reparto.component.css'
+  styleUrl: './reparto.component.css',
 })
-export class RepartoComponent {
-
-}
+export class RepartoComponent {}

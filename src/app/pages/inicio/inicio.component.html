@@ -1,3 +1,9 @@
-<app-button [buttonText]="'Necesito'" [buttonLink]="'/necesito'"></app-button>
-
-<app-button [buttonText]="'Reparto'" [buttonLink]="'/reparto'"></app-button>
+<main>
+  <h1>SOS<br />aquí<br />ahora</h1>
+  <figure *ngIf="!permission" class="location-cta">
+    <p class="location-permission-request">
+      Por favor, activa la ubicación en tu movil.
+    </p>
+    <i class="fa-solid fa-location-dot"></i>
+  </figure>
+</main>

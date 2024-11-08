@@ -1,5 +1,16 @@
-<li class="product-figure" *ngFor="let product of products">
-  <img *ngIf="product.image" [src]="product.image" [alt]="product.name" />
-  <figure *ngIf="!product.image" class="default-image"></figure>
-  <p class="product-title">{{ product.name }}</p>
-</li>
+<ul>
+  <li class="product-figure" *ngFor="let product of products">
+    <img
+      *ngIf="product.image"
+      [src]="product.image"
+      [alt]="product.name"
+      (click)="selectedProduct()"
+      [ngClass]="{
+        'selected-product': isSelected,
+        'unselected-product': !isSelected
+      }"
+    />
+    <figure *ngIf="!product.image" class="default-image"></figure>
+    <p class="product-title">{{ product.name }}</p>
+  </li>
+</ul>
