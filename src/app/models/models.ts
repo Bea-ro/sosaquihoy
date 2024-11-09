@@ -1,10 +1,10 @@
-import { NumberSymbol } from '@angular/common';
+import { Observable } from 'rxjs';
 
 export interface Product {
   name: string;
   image: string;
   isSelected: boolean;
-  location: string;
+  locationName: string | Observable<string>;
 }
 
 export interface LocationData {

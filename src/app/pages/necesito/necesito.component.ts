@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ProductoComponent } from '../../components/producto/producto.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { products } from '../../data/products';
-import { LocationData, Product } from '../../models/models';
+import { Product } from '../../models/models';
 import { CommonModule } from '@angular/common';
 import { LocationService } from '../../services/location.service';
 import { Observable } from 'rxjs';
@@ -20,6 +20,7 @@ export class NecesitoComponent {
   public searchInput: string = '';
   public notFound: boolean = false;
   public newProducts: Product[] = [];
+  public locationName$: Observable<string> | string = '';
 
   constructor(private locationService: LocationService) {}
 
@@ -33,30 +34,24 @@ export class NecesitoComponent {
     }
   }
 
-  public getLocationName(lat: string, lon: string) {
-    this.locationService
-      .getLocationData(lat, lon)
-      .subscribe((locationData: LocationData) => {
-        console.log(locationData.display_name);
-        return locationData.display_name;
-      });
+  public getLocationName(lat: string, lon: string): Observable<string> {
+    return this.locationService.getLocationData(lat, lon);
   }
 
   public addProduct(searchInput: string): Product[] {
     this.getLocationName(
       localStorage.getItem('lat') as string,
       localStorage.getItem('lon') as string
-    );
-
-    const newProduct: Product = {
-      name: searchInput,
-      image: '',
-      isSelected: false,
-      location: location,
-    };
-
-    this.allProducts.push(newProduct);
-    console.log(this.allProducts);
+    ).subscribe((locationName: string) => {
+      const newProduct: Product = {
+        name: searchInput,
+        image: '',
+        isSelected: false,
+        locationName: locationName,
+      };
+      this.allProducts.push(newProduct);
+      console.log(this.allProducts);
+    });
     return this.allProducts;
   }
 }

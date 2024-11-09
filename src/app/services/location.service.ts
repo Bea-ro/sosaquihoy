@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { LocationData } from '../models/models';
+import { transformLocationData } from './helpers/location.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -39,12 +40,14 @@ export class LocationService {
   }
 
   public getLocationData(lat: string, lon: string) {
-    return this.http.get<LocationData>(
-      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`,
-      {
-        headers: { 'Content-Type': 'application/json' },
-      }
-    );
+    return this.http
+      .get<LocationData>(
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        }
+      )
+      .pipe(map((locationData) => transformLocationData(locationData)));
   }
 }
 
