@@ -4,14 +4,15 @@ nav {
   z-index: 500;
   bottom: 0px;
   width: 100%;
-  background-color: var(--color-yellow);
   padding: 8px;
+  background-color: var(--color-yellow);
 }
 
 ul {
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
+  background-color: var(--color-yellow);
 }
 
 a {

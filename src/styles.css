@@ -54,5 +54,7 @@ li {
 .fa-solid {
   color: var(--color-purple);
   font-size: 32px;
-  text-align: center;
+  align-self: center;
+  padding: 5px;
+  border-radius: 14px;
 }

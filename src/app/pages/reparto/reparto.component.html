@@ -1,2 +1,13 @@
-<p>reparto works!</p>
+<main>
+  <div class="input-container">
+    <input
+      type="search"
+      placeholder="Escribe qué necesitas"
+      (input)="getFilteredProducts($event)"
+      [value]="searchInput"
+    />
+  </div>
+  <app-producto [products]="filteredProducts"></app-producto>
+  <p *ngIf="notFound">Actualmente no hay registro de esta necesidad.</p>
+</main>
 <app-navbar></app-navbar>

@@ -1,9 +1,19 @@
 <main>
-  <input
-    type="search"
-    placeholder="Escribe qué necesitas"
-    (input)="getFilteredProducts($event)"
-  />
+  <div class="input-container">
+    <input
+      type="search"
+      placeholder="Escribe qué necesitas"
+      (input)="getFilteredProducts($event)"
+      [value]="searchInput"
+    />
+    <i
+      rol="button"
+      *ngIf="notFound"
+      (click)="addProduct(searchInput)"
+      class="fa-solid fa-plus"
+    ></i>
+  </div>
+
   <app-producto [products]="filteredProducts"></app-producto>
 </main>
 <app-navbar></app-navbar>

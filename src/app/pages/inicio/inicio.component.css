@@ -8,3 +8,11 @@ h1 {
   color: var(--color-red);
   font-size: 72px;
 }
+
+.location-cta {
+  background-color: var(--color-yellow);
+  color: var(--color-purple);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 20px;
+}

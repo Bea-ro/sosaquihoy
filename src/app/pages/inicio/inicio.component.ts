@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../components/button/button.component';
 import { LocationService } from '../../services/location.service';
 import { CommonModule } from '@angular/common';
+import { LocationData } from '../../models/models';
 
 @Component({
   selector: 'app-inicio',
   standalone: true,
-  imports: [ButtonComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.css',
 })

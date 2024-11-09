@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Product } from '../../models/models';
-import { products } from '../../data/products';
 
 @Component({
   selector: 'app-producto',
@@ -12,8 +11,8 @@ import { products } from '../../data/products';
 })
 export class ProductoComponent {
   @Input() products: Product[] = [];
-  isSelected: boolean = false;
-  public selectedProduct() {
-    this.isSelected = !this.isSelected;
+
+  public selectedProduct(product: Product) {
+    product.isSelected = !product.isSelected;
   }
 }
