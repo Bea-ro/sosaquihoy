@@ -1,0 +1,34 @@
+<ul>
+  <li
+    class="product-figure"
+    *ngFor="let product of products"
+    (click)="selectedProduct(product)"
+  >
+    <img
+      *ngIf="product.image"
+      [src]="product.image"
+      [alt]="product.name"
+      [ngClass]="{
+        'selected-product':
+          (currentRoute === '/necesito' && product.isRequired) ||
+          (currentRoute === '/reparto' && product.isDonated),
+        'unselected-product':
+          (currentRoute === '/necesito' && !product.isRequired) ||
+          (currentRoute === '/reparto' && !product.isDonated)
+      }"
+    />
+    <figure *ngIf="!product.image" class="default-image"></figure>
+    <p
+      [ngClass]="{
+        'selected-product-title':
+          (currentRoute === '/necesito' && product.isRequired) ||
+          (currentRoute === '/reparto' && product.isDonated),
+        'unselected-product-title':
+          (currentRoute === '/necesito' && !product.isRequired) ||
+          (currentRoute === '/reparto' && !product.isDonated)
+      }"
+    >
+      {{ product.name }}
+    </p>
+  </li>
+</ul>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ProductoComponent } from '../../components/producto/producto.component';
+import { ProductoComponent } from '../../components/productos/producto.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { products } from '../../data/products';
 import { Product } from '../../models/models';
@@ -46,8 +46,9 @@ export class NecesitoComponent {
       const newProduct: Product = {
         name: searchInput,
         image: '',
-        isSelected: false,
-        locationName: locationName,
+        isRequired: false,
+        isDonated: false,
+        locations: [locationName],
       };
       this.allProducts.push(newProduct);
       console.log(this.allProducts);

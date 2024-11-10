@@ -2,12 +2,13 @@
   <div class="input-container">
     <input
       type="search"
-      placeholder="Escribe qué necesitas"
+      placeholder="¿Qué vas a repartir?"
       (input)="getFilteredProducts($event)"
       [value]="searchInput"
     />
   </div>
   <app-producto [products]="filteredProducts"></app-producto>
   <p *ngIf="notFound">Actualmente no hay registro de esta necesidad.</p>
+  <app-locations></app-locations>
 </main>
 <app-navbar></app-navbar>

@@ -3,12 +3,18 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { Product } from '../../models/models';
 import { products } from '../../data/products';
 import { CommonModule } from '@angular/common';
-import { ProductoComponent } from '../../components/producto/producto.component';
+import { ProductoComponent } from '../../components/productos/producto.component';
+import { LocationsComponent } from '../../components/locations/locations.component';
 
 @Component({
   selector: 'app-reparto',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, ProductoComponent],
+  imports: [
+    NavbarComponent,
+    CommonModule,
+    ProductoComponent,
+    LocationsComponent,
+  ],
   templateUrl: './reparto.component.html',
   styleUrl: './reparto.component.css',
 })
@@ -27,6 +33,4 @@ export class RepartoComponent {
       this.notFound = true;
     }
   }
-
-  //añadir que si el productIsSelected, muestra debajo las LOCALIDADES de ese producto
 }

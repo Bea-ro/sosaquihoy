@@ -3,8 +3,9 @@ import { Observable } from 'rxjs';
 export interface Product {
   name: string;
   image: string;
-  isSelected: boolean;
-  locationName: string | Observable<string>;
+  isRequired: boolean;
+  isDonated: boolean;
+  locations: string[];
 }
 
 export interface LocationData {
