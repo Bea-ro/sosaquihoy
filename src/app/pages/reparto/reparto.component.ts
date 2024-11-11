@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { Product } from '../../models/models';
-import { products } from '../../data/products';
 import { CommonModule } from '@angular/common';
 import { ProductoComponent } from '../../components/productos/producto.component';
 import { LocationsComponent } from '../../components/locations/locations.component';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-reparto',
@@ -18,11 +18,19 @@ import { LocationsComponent } from '../../components/locations/locations.compone
   templateUrl: './reparto.component.html',
   styleUrl: './reparto.component.css',
 })
-export class RepartoComponent {
+export class RepartoComponent implements OnInit {
   public searchInput: string = '';
-  public filteredProducts: Product[] = products;
-  public allProducts: Product[] = products;
+  public filteredProducts: Product[] = [];
+  public allProducts: Product[] = [];
   public notFound: boolean = false;
+
+  constructor(private productService: ProductService) {}
+
+  ngOnInit() {
+    this.productService
+      .getProducts()
+      .subscribe((products: Product[]) => (this.allProducts = products));
+  }
 
   public getFilteredProducts(event: Event) {
     this.searchInput = (event.target as HTMLInputElement).value.toLowerCase();

@@ -1,8 +1,6 @@
-import { Observable } from 'rxjs';
-
 export interface Product {
   name: string;
-  image: string;
+  image?: string;
   isRequired: boolean;
   isDonated: boolean;
   locations: string[];

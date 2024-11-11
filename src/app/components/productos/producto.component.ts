@@ -13,6 +13,7 @@ import { RouterModule, Router } from '@angular/router';
 export class ProductoComponent implements OnInit {
   @Input() products: Product[] = [];
   public currentRoute = '';
+  public selectedIndices: number[] = [];
 
   constructor(private router: Router) {}
 
@@ -20,11 +21,14 @@ export class ProductoComponent implements OnInit {
     this.currentRoute = this.router.url;
   }
 
-  public selectedProduct(product: Product) {
+  public selectedProduct(product: Product, index: number) {
+    const indexPosition = this.selectedIndices.indexOf(index);
+    indexPosition > -1
+      ? this.selectedIndices.splice(indexPosition, 1)
+      : this.selectedIndices.push(index);
+
     if (this.currentRoute === '/necesito') {
-      product.isRequired = !product.isRequired;
-    } else if (this.currentRoute === '/reparto') {
-      product.isDonated = !product.isDonated;
+      //añadir el put de isRequired
     }
   }
 }

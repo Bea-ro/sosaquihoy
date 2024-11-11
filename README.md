@@ -4,16 +4,13 @@ https://maps.googleapis.com/maps/api/geocode/json?latlng={position.coords.latitu
 formatted_address
 address_components.long_name
 
-git clone https://github.com/original-usuario/original-repositorio.git
-abrir y en el clon: git remote remove origin
-guardarlo en nuevo repo
+meter en front el put de isRequired
+sacar localizaciones en Reparto
 
-revisar lógica productos
-
+borrar un añadido a una ubicacion a las 24h
 // Suponiendo que guardas los datos en memoria
 let datos = [];
 
-borrar un añadido a una ubicacion a las 24h
 function agregarDato(dato) {
 const fechaCreacion = new Date();
 const nuevoDato = { ...dato, fechaCreacion };

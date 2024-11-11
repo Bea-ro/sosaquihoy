@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductoComponent } from '../../components/productos/producto.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
-import { products } from '../../data/products';
 import { Product } from '../../models/models';
 import { CommonModule } from '@angular/common';
 import { LocationService } from '../../services/location.service';
+import { ProductService } from '../../services/product.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,15 +14,31 @@ import { Observable } from 'rxjs';
   templateUrl: './necesito.component.html',
   styleUrl: './necesito.component.css',
 })
-export class NecesitoComponent {
-  public allProducts: Product[] = products;
-  public filteredProducts: Product[] = products;
+export class NecesitoComponent implements OnInit {
+  public allProducts: Product[] = [];
+  public filteredProducts: Product[] = [];
   public searchInput: string = '';
   public notFound: boolean = false;
-  public newProducts: Product[] = [];
-  public locationName$: Observable<string> | string = '';
+  public newProduct: Product = {
+    name: '',
+    isRequired: true,
+    isDonated: false,
+    locations: [],
+  };
+  public locationName: string = '';
 
-  constructor(private locationService: LocationService) {}
+  constructor(
+    private locationService: LocationService,
+    private productService: ProductService
+  ) {}
+
+  ngOnInit() {
+    this.productService.getProducts().subscribe((products: Product[]) => {
+      this.allProducts = products;
+      this.filteredProducts = products;
+    });
+    console.log(this.allProducts);
+  }
 
   public getFilteredProducts(event: Event) {
     this.searchInput = (event.target as HTMLInputElement).value.toLowerCase();
@@ -38,21 +54,32 @@ export class NecesitoComponent {
     return this.locationService.getLocationData(lat, lon);
   }
 
-  public addProduct(searchInput: string): Product[] {
+  public addProduct(searchInput: string) {
     this.getLocationName(
       localStorage.getItem('lat') as string,
       localStorage.getItem('lon') as string
-    ).subscribe((locationName: string) => {
-      const newProduct: Product = {
-        name: searchInput,
-        image: '',
-        isRequired: false,
-        isDonated: false,
-        locations: [locationName],
-      };
-      this.allProducts.push(newProduct);
-      console.log(this.allProducts);
+    ).subscribe((locationName: string) => (this.locationName = locationName));
+
+    this.newProduct = {
+      name: searchInput,
+      isRequired: true,
+      isDonated: false,
+      locations: [this.locationName],
+    };
+
+    this.productService.postProduct(this.newProduct).subscribe({
+      next: (addedProduct) => {
+        this.allProducts.push(addedProduct as Product);
+        this.newProduct = {
+          name: '',
+          isRequired: true,
+          isDonated: false,
+          locations: [],
+        };
+      },
+      error: (error) => {
+        console.error('Error al añadir el producto:', error);
+      },
     });
-    return this.allProducts;
   }
 }
