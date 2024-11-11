@@ -4,7 +4,7 @@
       type="search"
       placeholder="Escribe qué necesitas"
       (input)="getFilteredProducts($event)"
-      [value]="searchInput"
+      [(ngModel)]="searchInput"
     />
     <i
       rol="button"
@@ -13,7 +13,9 @@
       class="fa-solid fa-plus"
     ></i>
   </div>
-
+  <p class="success-message">
+    {{ postMessage }}
+  </p>
   <app-producto [products]="filteredProducts"></app-producto>
 </main>
 <app-navbar></app-navbar>

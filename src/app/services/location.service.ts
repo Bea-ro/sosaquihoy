@@ -39,10 +39,12 @@ export class LocationService {
     );
   }
 
-  public getLocationData(lat: string, lon: string) {
+  public getLocationData() {
+    this.lat = localStorage.getItem('lat') as string;
+    this.lon = localStorage.getItem('lon') as string;
     return this.http
       .get<LocationData>(
-        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`,
+        `https://nominatim.openstreetmap.org/reverse?lat=${this.lat}&lon=${this.lon}&format=json`,
         {
           headers: { 'Content-Type': 'application/json' },
         }

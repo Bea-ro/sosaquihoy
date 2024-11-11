@@ -26,6 +26,7 @@ export class NecesitoComponent implements OnInit {
     locations: [],
   };
   public locationName: string = '';
+  public postMessage: string = '';
 
   constructor(
     private locationService: LocationService,
@@ -36,8 +37,8 @@ export class NecesitoComponent implements OnInit {
     this.productService.getProducts().subscribe((products: Product[]) => {
       this.allProducts = products;
       this.filteredProducts = products;
+      console.log(this.filteredProducts);
     });
-    console.log(this.allProducts);
   }
 
   public getFilteredProducts(event: Event) {
@@ -50,36 +51,36 @@ export class NecesitoComponent implements OnInit {
     }
   }
 
-  public getLocationName(lat: string, lon: string): Observable<string> {
-    return this.locationService.getLocationData(lat, lon);
+  public getLocationName(): Observable<string> {
+    return this.locationService.getLocationData();
   }
 
   public addProduct(searchInput: string) {
-    this.getLocationName(
-      localStorage.getItem('lat') as string,
-      localStorage.getItem('lon') as string
-    ).subscribe((locationName: string) => (this.locationName = locationName));
+    this.getLocationName().subscribe((locationName: string) => {
+      this.locationName = locationName;
 
-    this.newProduct = {
-      name: searchInput,
-      isRequired: true,
-      isDonated: false,
-      locations: [this.locationName],
-    };
-
-    this.productService.postProduct(this.newProduct).subscribe({
-      next: (addedProduct) => {
-        this.allProducts.push(addedProduct as Product);
-        this.newProduct = {
-          name: '',
-          isRequired: true,
-          isDonated: false,
-          locations: [],
-        };
-      },
-      error: (error) => {
-        console.error('Error al añadir el producto:', error);
-      },
+      this.newProduct = {
+        name: searchInput,
+        isRequired: true,
+        isDonated: false,
+        locations: [this.locationName],
+      };
+      console.log(this.newProduct);
+      this.productService.postProduct(this.newProduct).subscribe({
+        next: (addedProduct) => {
+          console.log(addedProduct);
+          console.log(this.filteredProducts);
+          this.filteredProducts.unshift(addedProduct as Product);
+          this.postMessage = 'Tu necesidad se ha guardado.';
+        },
+        error: (errorValue) =>
+          (this.postMessage =
+            'No se ha podido guardad tu necesidad. Por favor, inténtalo más tarde.'),
+        complete: () => {
+          this.searchInput = '';
+          this.notFound = false;
+        },
+      });
     });
   }
 }

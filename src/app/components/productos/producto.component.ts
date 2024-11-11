@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../models/models';
 import { RouterModule, Router } from '@angular/router';
+import { ProductService } from '../../services/product.service';
+import { Observable } from 'rxjs';
+import { LocationService } from '../../services/location.service';
 
 @Component({
   selector: 'app-producto',
@@ -12,13 +15,22 @@ import { RouterModule, Router } from '@angular/router';
 })
 export class ProductoComponent implements OnInit {
   @Input() products: Product[] = [];
+  public locationName: string = '';
   public currentRoute = '';
   public selectedIndices: number[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private productService: ProductService,
+    private locationService: LocationService
+  ) {}
 
   ngOnInit() {
     this.currentRoute = this.router.url;
+  }
+
+  public getLocationName(): Observable<string> {
+    return this.locationService.getLocationData();
   }
 
   public selectedProduct(product: Product, index: number) {
@@ -28,7 +40,11 @@ export class ProductoComponent implements OnInit {
       : this.selectedIndices.push(index);
 
     if (this.currentRoute === '/necesito') {
-      //añadir el put de isRequired
+      this.getLocationName().subscribe(
+        (locationName: string) => (this.locationName = locationName)
+      );
+      console.log(this.locationName);
+      this.productService.putProduct(product, this.locationName);
     }
   }
 }

@@ -21,4 +21,10 @@ export class ProductService {
       headers: { 'Content-Type': 'application/json' },
     });
   }
+
+  public putProduct(product: Product, location: string) {
+    return this.http.put(`${this.SOS_API_URL}/${product.name}`, product, {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 }

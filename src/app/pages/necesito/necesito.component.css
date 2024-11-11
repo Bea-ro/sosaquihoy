@@ -3,6 +3,8 @@
   gap: 10px;
   margin: 14px;
   max-width: 95%;
+  position: fixed;
+  z-index: 500;
 }
 
 input {
@@ -16,4 +18,11 @@ input {
 .fa-plus {
   background-color: var(--color-yellow);
   border-radius: 16px;
+}
+
+.success-message {
+  color: var(--color-purple);
+  margin-top: 60px;
+  margin-left: 16px;
+  align-self: flex-start;
 }
