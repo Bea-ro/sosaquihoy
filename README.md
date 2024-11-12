@@ -4,7 +4,7 @@ https://maps.googleapis.com/maps/api/geocode/json?latlng={position.coords.latitu
 formatted_address
 address_components.long_name
 
-meter en front el put de isRequired
+en el filtrado, una vez seleccionas el producto, que se restablezcan todos y se limpie el inpu
 sacar localizaciones en Reparto
 
 borrar un añadido a una ubicacion a las 24h

@@ -43,7 +43,6 @@ export class ProductoComponent implements OnInit {
       this.getLocationName().subscribe(
         (locationName: string) => (this.locationName = locationName)
       );
-      console.log(this.locationName);
       this.productService.putProduct(product, this.locationName);
     }
   }

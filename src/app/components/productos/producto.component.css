@@ -4,7 +4,6 @@ ul {
   max-width: 100%;
   gap: 16px;
   padding: 16px;
-  margin-top: 60px;
 }
 
 li {
@@ -17,7 +16,6 @@ li {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: var(--color-purple);
   border-radius: 3px;
   padding: 3px 6px;
   background-color: var(--color-yellow);

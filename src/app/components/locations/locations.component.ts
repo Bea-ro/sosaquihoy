@@ -10,23 +10,19 @@ import { Product } from '../../models/models';
   templateUrl: './locations.component.html',
   styleUrl: './locations.component.css',
 })
-export class LocationsComponent implements OnInit {
+export class LocationsComponent {
   public locations: string[] = [];
-  public allProducts: Product[] = products;
+  public allProducts: Product[] = [];
 
-  ngOnInit(): void {
-    const filteredProducts = this.allProducts.filter(
-      (product) => product.isRequired && product.isDonated
-    );
+  // ngOnInit(): void {
+  //   const filteredLocations: string[][] = filteredProducts.map(
+  //     (product) => product.locations
+  //   );
 
-    const filteredLocations: string[][] = filteredProducts.map(
-      (product) => product.locations
-    );
-
-    filteredLocations.flat().forEach((location) => {
-      if (!this.locations.includes(location)) {
-        this.locations.push(location);
-      }
-    });
-  }
+  //   filteredLocations.flat().forEach((location) => {
+  //     if (!this.locations.includes(location)) {
+  //       this.locations.push(location);
+  //     }
+  //   });
+  // }
 }

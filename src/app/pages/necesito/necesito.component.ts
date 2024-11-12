@@ -6,19 +6,26 @@ import { CommonModule } from '@angular/common';
 import { LocationService } from '../../services/location.service';
 import { ProductService } from '../../services/product.service';
 import { Observable } from 'rxjs';
+import { FilterPipe } from '../../pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-necesito',
   standalone: true,
-  imports: [ProductoComponent, NavbarComponent, CommonModule],
+  imports: [
+    ProductoComponent,
+    NavbarComponent,
+    CommonModule,
+    FilterPipe,
+    FormsModule,
+  ],
   templateUrl: './necesito.component.html',
   styleUrl: './necesito.component.css',
 })
 export class NecesitoComponent implements OnInit {
-  public allProducts: Product[] = [];
-  public filteredProducts: Product[] = [];
+  public products$?: Observable<Product[]>;
+
   public searchInput: string = '';
-  public notFound: boolean = false;
   public newProduct: Product = {
     name: '',
     isRequired: true,
@@ -33,22 +40,9 @@ export class NecesitoComponent implements OnInit {
     private productService: ProductService
   ) {}
 
-  ngOnInit() {
-    this.productService.getProducts().subscribe((products: Product[]) => {
-      this.allProducts = products;
-      this.filteredProducts = products;
-      console.log(this.filteredProducts);
-    });
-  }
-
-  public getFilteredProducts(event: Event) {
-    this.searchInput = (event.target as HTMLInputElement).value.toLowerCase();
-    this.filteredProducts = this.allProducts.filter((product) =>
-      product.name.toLowerCase().includes(this.searchInput)
-    );
-    if (this.filteredProducts.length === 0) {
-      this.notFound = true;
-    }
+  ngOnInit(): void {
+    this.products$ = this.productService.products$;
+    this.products$.subscribe((products) => console.log('Productos:', products));
   }
 
   public getLocationName(): Observable<string> {
@@ -69,8 +63,6 @@ export class NecesitoComponent implements OnInit {
       this.productService.postProduct(this.newProduct).subscribe({
         next: (addedProduct) => {
           console.log(addedProduct);
-          console.log(this.filteredProducts);
-          this.filteredProducts.unshift(addedProduct as Product);
           this.postMessage = 'Tu necesidad se ha guardado.';
         },
         error: (errorValue) =>
@@ -78,7 +70,6 @@ export class NecesitoComponent implements OnInit {
             'No se ha podido guardad tu necesidad. Por favor, inténtalo más tarde.'),
         complete: () => {
           this.searchInput = '';
-          this.notFound = false;
         },
       });
     });

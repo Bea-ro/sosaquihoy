@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { ProductoComponent } from '../../components/productos/producto.component';
 import { LocationsComponent } from '../../components/locations/locations.component';
 import { ProductService } from '../../services/product.service';
+import { Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from '../../pipes/filter.pipe';
 
 @Component({
   selector: 'app-reparto',
@@ -14,31 +17,19 @@ import { ProductService } from '../../services/product.service';
     CommonModule,
     ProductoComponent,
     LocationsComponent,
+    FormsModule,
+    FilterPipe,
   ],
   templateUrl: './reparto.component.html',
   styleUrl: './reparto.component.css',
 })
 export class RepartoComponent implements OnInit {
+  public products$?: Observable<Product[]>;
   public searchInput: string = '';
-  public filteredProducts: Product[] = [];
-  public allProducts: Product[] = [];
-  public notFound: boolean = false;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.productService
-      .getProducts()
-      .subscribe((products: Product[]) => (this.allProducts = products));
-  }
-
-  public getFilteredProducts(event: Event) {
-    this.searchInput = (event.target as HTMLInputElement).value.toLowerCase();
-    this.filteredProducts = this.allProducts.filter((product) =>
-      product.name.toLowerCase().includes(this.searchInput)
-    );
-    if (this.filteredProducts.length === 0) {
-      this.notFound = true;
-    }
+    this.products$ = this.productService.products$;
   }
 }

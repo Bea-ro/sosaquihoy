@@ -1,14 +1,21 @@
 <main>
-  <div class="input-container">
-    <input
-      type="search"
-      placeholder="¿Qué vas a repartir?"
-      (input)="getFilteredProducts($event)"
-      [value]="searchInput"
-    />
-  </div>
-  <app-producto [products]="filteredProducts"></app-producto>
-  <p *ngIf="notFound">Actualmente no hay registro de esta necesidad.</p>
+  <input
+    type="search"
+    placeholder="¿Qué vas a repartir?"
+    [(ngModel)]="searchInput"
+    class="reparto-input"
+  />
+
+  <app-producto
+    *ngIf="products$ | async | filter : searchInput as products"
+    [products]="products"
+  ></app-producto>
+
+  @if (searchInput.length === 0) {
+  <p>Por favor, selecciona los artículos que puedes repartir.</p>
+  } @else {
+  <p>Actualmente no hay registro de esta necesidad.</p>
+  }
   <app-locations></app-locations>
 </main>
 <app-navbar></app-navbar>
