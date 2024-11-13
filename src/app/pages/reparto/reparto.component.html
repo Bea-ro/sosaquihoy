@@ -9,13 +9,13 @@
   <app-producto
     *ngIf="products$ | async | filter : searchInput as products"
     [products]="products"
+    [message]="
+      (products$ | async | filter : searchInput)?.length === 0
+        ? 'Actualmente no hay registro de esta necesidad'
+        : 'Por favor, selecciona los artículos que puedes repartir'
+    "
+    [arrayLength]="(products$ | async | filter : searchInput)?.length"
   ></app-producto>
-
-  @if (searchInput.length === 0) {
-  <p>Por favor, selecciona los artículos que puedes repartir.</p>
-  } @else {
-  <p>Actualmente no hay registro de esta necesidad.</p>
-  }
-  <app-locations></app-locations>
+  <app-locations [locations]="locations"></app-locations>
 </main>
 <app-navbar></app-navbar>

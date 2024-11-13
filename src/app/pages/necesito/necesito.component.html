@@ -1,5 +1,5 @@
 <main>
-  <div class="input-container">
+  <section class="input-container">
     <input
       type="search"
       placeholder="Escribe lo que necesitas"
@@ -11,13 +11,12 @@
       (click)="addProduct(searchInput)"
       class="fa-solid fa-plus"
     ></i>
-  </div>
-  <p class="success-message">
-    {{ postMessage }}
-  </p>
+  </section>
   <app-producto
     *ngIf="products$ | async | filter : searchInput as products"
     [products]="products"
+    [message]="message"
+    [arrayLength]="(products$ | async | filter : searchInput)?.length"
   ></app-producto>
 </main>
 <app-navbar></app-navbar>

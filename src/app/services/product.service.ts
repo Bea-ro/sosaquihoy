@@ -24,21 +24,19 @@ export class ProductService {
       });
   }
 
-  // public getProducts(): Observable<Product[]> {
-  //   return this.http.get<Product[]>(this.SOS_API_URL, {
-  //     headers: { 'Content-Type': 'application/json' },
-  //   });
-  // }
-
   public postProduct(product: Product) {
     return this.http.post(this.SOS_API_URL, product, {
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
-  public putProduct(product: Product, location: string) {
-    return this.http.put(`${this.SOS_API_URL}/${product.name}`, product, {
-      headers: { 'Content-Type': 'application/json' },
-    });
+  public putProduct(productName: string, location: string): Observable<any> {
+    return this.http.put(
+      `${this.SOS_API_URL}/${productName}`,
+      { location },
+      {
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 }

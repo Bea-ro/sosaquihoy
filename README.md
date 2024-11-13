@@ -4,7 +4,7 @@ https://maps.googleapis.com/maps/api/geocode/json?latlng={position.coords.latitu
 formatted_address
 address_components.long_name
 
-en el filtrado, una vez seleccionas el producto, que se restablezcan todos y se limpie el inpu
+limpie el inpu al clicar flecha izquirda
 sacar localizaciones en Reparto
 
 borrar un añadido a una ubicacion a las 24h

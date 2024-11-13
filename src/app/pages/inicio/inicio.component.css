@@ -1,12 +1,14 @@
 main {
   height: 100vh;
   text-align: center;
+  background-color: var(--color-orange);
 }
 
 h1 {
-  margin-top: 40%;
+  margin-top: 60%;
   color: var(--color-red);
   font-size: 72px;
+  text-shadow: 2px 2px 4px rgba(255, 178, 0, 0.4);
 }
 
 .location-cta {
@@ -15,4 +17,8 @@ h1 {
   border-radius: 16px;
   padding: 20px;
   margin-top: 20px;
+}
+
+p {
+  margin-bottom: 6px;
 }

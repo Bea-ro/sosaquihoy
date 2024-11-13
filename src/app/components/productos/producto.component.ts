@@ -15,6 +15,8 @@ import { LocationService } from '../../services/location.service';
 })
 export class ProductoComponent implements OnInit {
   @Input() products: Product[] = [];
+  @Input() message: string = 'Tu necesidad se ha guardado.';
+  @Input() arrayLength: undefined | number;
   public locationName: string = '';
   public currentRoute = '';
   public selectedIndices: number[] = [];
@@ -40,10 +42,23 @@ export class ProductoComponent implements OnInit {
       : this.selectedIndices.push(index);
 
     if (this.currentRoute === '/necesito') {
-      this.getLocationName().subscribe(
-        (locationName: string) => (this.locationName = locationName)
-      );
-      this.productService.putProduct(product, this.locationName);
+      this.getLocationName().subscribe((locationName: string) => {
+        this.locationName = locationName;
+        this.productService
+          .putProduct(product.name, this.locationName)
+          .subscribe({
+            next: (response) => {
+              this.message = 'Tu necesidad se ha guardado';
+              setTimeout(() => {
+                this.message = 'Puedes seleccionar más necesidades';
+              }, 3000);
+            },
+            error: (error) => {
+              this.message =
+                'No se ha podido guardar tu necesidad. Por favor, inténtalo más tarde';
+            },
+          });
+      });
     }
   }
 }

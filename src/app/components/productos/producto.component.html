@@ -1,3 +1,14 @@
+<div>
+  <i *ngIf="arrayLength === 1" class="fa-solid fa-arrow-left"></i>
+
+  <p class="success-message">
+    {{
+      arrayLength === 0
+        ? "Tu necesidad no está en el listado, añádela"
+        : message
+    }}
+  </p>
+</div>
 <ul>
   <li
     class="product-figure"

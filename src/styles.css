@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-  --color-yellow: #ffb200;
-  --color-orange: #eb5b00;
-  --color-red: #e4003a;
-  --color-purple: #b60071;
+  --color-yellow: rgb(255, 178, 0);
+  --color-orange: rgb(235, 91, 0);
+  --color-red: rgb(228, 0, 58);
+  --color-purple: rgb(182, 0, 113);
   --color-black: #000000;
   --color-grey: #e2e2e2;
   --color-white: #ffffff;
@@ -30,9 +30,6 @@
   font-style: normal;
   color: var(--color-purple);
 }
-/* body {
-  max-width: 768px;
-} */
 
 main {
   display: flex;
@@ -62,7 +59,7 @@ input {
 
 .fa-solid {
   color: var(--color-purple);
-  font-size: 30px;
+  font-size: 26px;
   align-self: center;
   border-radius: 14px;
 }

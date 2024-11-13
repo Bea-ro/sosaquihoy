@@ -33,7 +33,8 @@ export class NecesitoComponent implements OnInit {
     locations: [],
   };
   public locationName: string = '';
-  public postMessage: string = '';
+  public message: string = 'Busca y selecciona lo que necesitas';
+  public arrayLength: undefined | number;
 
   constructor(
     private locationService: LocationService,
@@ -42,7 +43,7 @@ export class NecesitoComponent implements OnInit {
 
   ngOnInit(): void {
     this.products$ = this.productService.products$;
-    this.products$.subscribe((products) => console.log('Productos:', products));
+    //this.products$.subscribe((products) => console.log('Productos:', products));
   }
 
   public getLocationName(): Observable<string> {
@@ -59,15 +60,15 @@ export class NecesitoComponent implements OnInit {
         isDonated: false,
         locations: [this.locationName],
       };
-      console.log(this.newProduct);
+
       this.productService.postProduct(this.newProduct).subscribe({
         next: (addedProduct) => {
           console.log(addedProduct);
-          this.postMessage = 'Tu necesidad se ha guardado.';
+          this.message = 'Tu necesidad se ha guardado.';
         },
         error: (errorValue) =>
-          (this.postMessage =
-            'No se ha podido guardad tu necesidad. Por favor, inténtalo más tarde.'),
+          (this.message =
+            'No se ha podido guardad tu necesidad. Por favor, inténtalo más tarde'),
         complete: () => {
           this.searchInput = '';
         },

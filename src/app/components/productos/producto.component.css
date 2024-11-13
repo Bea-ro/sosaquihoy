@@ -1,9 +1,27 @@
+:host {
+  margin-top: 80px;
+}
+
+div {
+  display: flex;
+}
+
+.fa-arrow-left {
+  background-color: var(--color-yellow);
+  border-radius: 50%;
+  padding: 6px;
+}
+
+.success-message {
+  margin-left: 16px;
+}
+
 ul {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   max-width: 100%;
   gap: 16px;
-  padding: 16px;
+  padding: 16px 16px 100px 16px;
 }
 
 li {
